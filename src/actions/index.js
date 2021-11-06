@@ -14,10 +14,13 @@ export const ACOES = {
         valor (varia em função do tipo do cartão escolhido)
 */
 export const pedirCartao = (cpf, nome, cartaoEscolhido) => {
-    //substitua "null" pela sua solução
     return {
-        type: null,
-        payload: null
+        type: "PEDIR_CARTAO",
+        payload: {
+            cpf,
+            nome,
+            cartaoEscolhido
+        }
     }
 }
 
@@ -33,7 +36,10 @@ export const pedirCartao = (cpf, nome, cartaoEscolhido) => {
 export const pedirCashback = (cpf, valor) => {
     //substitua "null" pela sua solução
     return {
-        type: null,
-        payload: null
+        type: "PEDIR_CASHBACK",
+        payload: {
+            cpf,
+            valor
+        }
     }
 }

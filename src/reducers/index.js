@@ -7,7 +7,13 @@ import { combineReducers } from 'redux'
     Ela deve verificar o type da ação e, se for o caso, adicionar seu payload à sua fatia de estado
 */
 const pedidosCartaoReducer = (pedidosCartao = [], acao) => {
-    //seu código aqui
+    if ( acao.type === "PEDIR_CARTAO" ) {
+        return [
+            ...pedidosCartao,
+            acao.payload
+        ]
+    }
+    return pedidosCartao
 }
 
 
@@ -16,7 +22,13 @@ const pedidosCartaoReducer = (pedidosCartao = [], acao) => {
     Ela deve verificar o type da ação e, se for o caso, adicionar seu payload à sua fatia de estado
 */
 const pedidosCashbackReducer = (pedidosCashback = [], acao) => {
-   //seu código aqui
+   if ( acao.type === "PEDIR_CASHBACK" ) {
+       return [
+           ...pedidosCashback,
+           acao.payload
+       ]
+   }
+   return pedidosCashback
 }
 
 /* 
@@ -24,4 +36,7 @@ const pedidosCashbackReducer = (pedidosCashback = [], acao) => {
     e devolver um único objeto que os contém.
     Os nomes das chaves não devem incluir o sufixo "reducer"
 */
-export default null
+export default combineReducers({
+    pedidosCartao: pedidosCartaoReducer,
+    pedidosCashback: pedidosCartaoReducer
+})
