@@ -14,12 +14,20 @@ export const ACOES = {
         valor (varia em função do tipo do cartão escolhido)
 */
 export const pedirCartao = (cpf, nome, cartaoEscolhido) => {
+    const dataAtual = Date.now()
+    const tipoTransacao = ACOES.pedirCartao
+    let valor
+
+    cartaoEscolhido === 'gold' ? valor = 50 : valor = 100
+
     return {
         type: "PEDIR_CARTAO",
         payload: {
             cpf,
             nome,
-            cartaoEscolhido
+            tipoTransacao,
+            dataAtual,
+            valor
         }
     }
 }
@@ -34,12 +42,16 @@ export const pedirCartao = (cpf, nome, cartaoEscolhido) => {
         data (é a data atual do sistema. Lembre-se da classe Date. Ela é suficiente)
 */
 export const pedirCashback = (cpf, valor) => {
-    //substitua "null" pela sua solução
+    const dataAtual = Date.now()
+    const tipoTransacao = ACOES.pedirCashback
+
     return {
         type: "PEDIR_CASHBACK",
         payload: {
             cpf,
-            valor
+            valor,
+            tipoTransacao,
+            dataAtual
         }
     }
 }

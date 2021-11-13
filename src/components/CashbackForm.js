@@ -2,7 +2,7 @@ import React, { useState }from 'react'
 import { Card } from 'primereact/card'
 import { Button } from 'primereact/button'
 import { connect } from 'react-redux'
-//faça o import da criadora de ação apropriada para esse componente aqui
+import { pedirCashback } from '../actions'
 
 const CashbackForm = (props) => {
     const [cpf, setCpf] = useState('')

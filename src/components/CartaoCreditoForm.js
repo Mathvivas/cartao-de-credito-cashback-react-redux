@@ -4,6 +4,7 @@ import { Button } from 'primereact/button'
 import { RadioButton } from 'primereact/radiobutton'
 import { connect } from 'react-redux'
 import { pedirCartao } from '../actions'
+
 const CashbackForm = (props) => {
     const [cpf, setCpf] = useState('')
     const [nome, setNome] = useState('')
@@ -12,6 +13,7 @@ const CashbackForm = (props) => {
     const enviar = (e) => {
         e.preventDefault()
         //faça o dispatch de uma ação de pedido de cartão aqui
+        store.dispatch(pedirCartao(cpf, nome, cartaoEscolhido))
     }
     return (
         <Card>
@@ -54,7 +56,7 @@ const CashbackForm = (props) => {
                         checked={cartaoEscolhido === 'platinum'}
 
                     />
-                    <label htmlFor="cartaoGold">Platinum(R$100)</label>
+                    <label htmlFor="cartaoPlatinum">Platinum(R$100)</label>
                 </div>
             </div>
             

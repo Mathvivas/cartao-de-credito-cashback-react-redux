@@ -23,8 +23,7 @@ const Caixa = (props) => {
     Dica2: Você pode descobrir o nome da chave a ser utilizada aqui mesmo, neste arquivo.
 */
 const mapStateToProps = (state) => (
-    {
-        //seu código aqui
-    }
+    console.log(state)
+    
 )
 export default connect(mapStateToProps)(Caixa)
