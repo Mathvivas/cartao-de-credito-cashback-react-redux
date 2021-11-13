@@ -4,6 +4,11 @@ import { Button } from 'primereact/button'
 import { RadioButton } from 'primereact/radiobutton'
 import { connect } from 'react-redux'
 import { pedirCartao } from '../actions'
+import combineReducers from '../reducers/index'
+
+const redux = require('redux');
+
+const store = redux.createStore(combineReducers)
 
 const CashbackForm = (props) => {
     const [cpf, setCpf] = useState('')
