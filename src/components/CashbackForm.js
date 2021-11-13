@@ -1,22 +1,25 @@
 import React, { useState }from 'react'
 import { Card } from 'primereact/card'
 import { Button } from 'primereact/button'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { pedirCashback } from '../actions'
-import combineReducers from '../reducers/index'
 
-const redux = require('redux');
-
-const store = redux.createStore(combineReducers)
 
 const CashbackForm = (props) => {
+    const dispatch = useDispatch()
     const [cpf, setCpf] = useState('')
     const [valor, setValor] = useState(0)
 
     const enviar = (e) => {
         e.preventDefault()
         //faça o dispatch de uma ação de pedido de cashback aqui
-        store.dispatch(pedirCashback(cpf, valor))
+        if(cpf.length>0 && valor >0){
+            dispatch(pedirCashback(cpf, valor))
+            setCpf("")
+            setValor(0)
+        }
+
+ 
     }
 
     return (
@@ -25,6 +28,7 @@ const CashbackForm = (props) => {
                 <label htmlFor="cpf">CPF</label>
                 <input
                     id="cpf" 
+                    value={cpf}
                     type="text" 
                     className="inputfield w-full p-3"
                     onChange={e => {setCpf(e.target.value)}}
@@ -34,13 +38,13 @@ const CashbackForm = (props) => {
                 <label htmlFor="valor">Valor</label>
                 <input
                     id="valor" 
+                    value={valor}
                     type="number" 
                     className="inputfield w-full p-3"
                     onChange={e => setValor(e.target.value)}
                 />
             </div>
                      
-            
             <Button 
                 label="OK"
                 className="w-full mt-4"

@@ -12,7 +12,7 @@ const LogsLista = (props) => {
                         key={i}>
                         <p className="text-center mt-1">{log.tipoTransacao}</p>
                         <p className="text-center">
-                            {log.data}: R${log.valor}
+                        {log.data.toLocaleString()}: R${log.valor}
                         </p>
                     </div> 
                 ) 

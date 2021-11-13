@@ -2,15 +2,14 @@ import React, { useState }from 'react'
 import { Card } from 'primereact/card'
 import { Button } from 'primereact/button'
 import { RadioButton } from 'primereact/radiobutton'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { pedirCartao } from '../actions'
-import combineReducers from '../reducers/index'
 
-const redux = require('redux');
 
-const store = redux.createStore(combineReducers)
 
 const CashbackForm = (props) => {
+
+    const dispatch = useDispatch()
     const [cpf, setCpf] = useState('')
     const [nome, setNome] = useState('')
     const [cartaoEscolhido, setCartoEscolhido] = useState('')
@@ -18,7 +17,13 @@ const CashbackForm = (props) => {
     const enviar = (e) => {
         e.preventDefault()
         //faça o dispatch de uma ação de pedido de cartão aqui
-        store.dispatch(pedirCartao(cpf, nome, cartaoEscolhido))
+        if(cpf.length>0 && nome.length >0 &&cartaoEscolhido.length>0 ){
+        dispatch(pedirCartao(cpf, nome, cartaoEscolhido))
+        setCpf('')
+        setNome('')
+        setCartoEscolhido('')
+        }
+
     }
     return (
         <Card>
@@ -28,6 +33,7 @@ const CashbackForm = (props) => {
                     id="cpf" 
                     type="text" 
                     className="inputfield w-full p-3"
+                    value={cpf}
                     onChange={e => {setCpf(e.target.value)}}
                 />
             </div>
@@ -36,6 +42,7 @@ const CashbackForm = (props) => {
                 <input
                     id="nome" 
                     type="text" 
+                    value={nome}
                     className="inputfield w-full p-3"
                     onChange={e => setNome(e.target.value)}
                 />
@@ -48,7 +55,6 @@ const CashbackForm = (props) => {
                         inputId="cartaoGold"
                         onChange={(e) => setCartoEscolhido(e.target.value)}
                         checked={cartaoEscolhido === 'gold'}
-
                     />
                     <label htmlFor="cartaoGold">Gold(R$50)</label>
                 </div>

@@ -1,12 +1,14 @@
 import React from 'react'
 import { Card } from 'primereact/card'
 import { connect } from 'react-redux'
-const Caixa = (props) => {
+const Caixa = ({total}) => {
+
+
     return (
         <Card
             title="Caixa"
             subTitle="Total incluindo pedidos de cartão e de cashback">
-            <p className="text-center text-4xl">R${props.caixa}</p> 
+            <p className="text-center text-4xl">R${total}</p> 
         </Card>
     )
 }
@@ -22,8 +24,31 @@ const Caixa = (props) => {
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
     Dica2: Você pode descobrir o nome da chave a ser utilizada aqui mesmo, neste arquivo.
 */
-const mapStateToProps = (state) => (
-    console.log(state)
+
+function getTotal(state ){
+    let total = 0
+    const {pedidosCartao, pedidosCashback} = state
+    const transactions = [...pedidosCartao, ...pedidosCashback]
+
+    transactions.forEach(t => {
+        if( t.tipoTransacao === "PEDIR_CARTAO"){
+            total += t.valor
+
+        }
+         if( t.tipoTransacao === "PEDIR_CASHBACK"){
+            total -= t.valor
+
+        }
+    })
+
+    return total
+
+
+}
+
+
+const mapStateToProps = (state) => {
+  return {total: getTotal(state)}
+}
     
-)
 export default connect(mapStateToProps)(Caixa)
