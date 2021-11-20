@@ -46,9 +46,24 @@ function getTotal(state ){
 
 }
 
-
+/*
+A função mapStateToProps tem como finalidade
+fazer com que o estado gerenciado pelo Redux seja entregue aos componentes via
+props
+trata-se de uma convenção e seu nome pode ser qualquer um
+*/
 const mapStateToProps = (state) => {
   return {total: getTotal(state)}
 }
-    
+/*
+Para que o componente tenha acesso aos recursos do Redux, utilizamos
+a função connect. Quando chamada, ela devolve uma função que, então, colocamos
+em execução entregando-lhe como parâmetro o nome do componente (Caixa)
+*/
+//A função connect é chamada
+//Ela recebe mapStateToProps como parâmetro
+//a expressão connect(mapStateToProps) resulta em uma função
+//ela é chamada com Caixa como parâmetro
+//O props de Caixa passa a ter acesso ao estado
 export default connect(mapStateToProps)(Caixa)
+

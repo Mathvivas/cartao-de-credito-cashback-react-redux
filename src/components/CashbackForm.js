@@ -14,6 +14,7 @@ const CashbackForm = (props) => {
         e.preventDefault()
         //faça o dispatch de uma ação de pedido de cashback aqui
         if(cpf.length>0 && valor >0){
+            //pedirCashback é a função criadora de ação que retorna o json
             dispatch(pedirCashback(cpf, valor))
             setCpf("")
             setValor(0)

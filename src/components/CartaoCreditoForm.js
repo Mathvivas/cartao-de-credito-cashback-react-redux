@@ -8,20 +8,27 @@ import { pedirCartao } from '../actions'
 
 
 const CashbackForm = (props) => {
-
+    // Hooks, dispatch -> retorna uma referencia ao dispatch do redux store usado para dar dispatch em ações como usado a seguir:
     const dispatch = useDispatch()
+    // useState é um hook para definir o estado inicial do "cpf" no caso e o set 
+    // state usando mais tarde para setar este cpf para outro valor usando hook e não precisando usar o setState de classes
     const [cpf, setCpf] = useState('')
     const [nome, setNome] = useState('')
     const [cartaoEscolhido, setCartoEscolhido] = useState('')
 
     const enviar = (e) => {
+        //Previne o comportamento padrão do react
         e.preventDefault()
         //faça o dispatch de uma ação de pedido de cartão aqui
         if(cpf.length>0 && nome.length >0 &&cartaoEscolhido.length>0 ){
+        //pedirCartao é a função criadora de ação que retorna o json
+        //usando o hook useDispatch para desparar uma ação "pedirCartao"
         dispatch(pedirCartao(cpf, nome, cartaoEscolhido))
         setCpf('')
         setNome('')
         setCartoEscolhido('')
+        // O component CartaoCreditoForm utiliza a action pedirCartao para dar um 
+        // dispatch/envio da ação para possível mudança de estado, clicando em um button "Enviar", com os dados de um formulário de cartão de crédito.
         }
 
     }
